@@ -54,7 +54,7 @@ try {
     <nav>
         <a href="index.php" class="button">Home</a>
         <a href="create_user.php" class="button">Add New User</a>
-        <a href="admin_dashboard.php" class="button">Manage Users</a>
+        <!--<a href="admin_dashboard.php" class="button">Manage Users</a>-->
         <a href="logout.php" class="button">Logout</a>
     </nav>
 

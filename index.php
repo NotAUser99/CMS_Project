@@ -1,5 +1,17 @@
 <?php
 session_start(); // Start the session
+require 'connect.php';
+
+// Fetch the 10 most recent listings
+$sql = "
+    SELECT listing_id, title
+    FROM listings
+    ORDER BY created_at DESC
+    LIMIT 10
+";
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$recent_listings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>

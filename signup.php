@@ -47,32 +47,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <header>
-        <h1>Register</h1>
+        <h1>River Park South Buy&Sell</h1>
+        <p>River Park South's own local trading hub</p>
     </header>
 
-    <?php if (!empty($error)): ?>
-        <div class="error"><?= htmlspecialchars($error); ?></div>
-    <?php endif; ?>
+    <!-- Admin Button (Separate from Main Navigation) -->
+    <div class="admin">
+        <a href="admin_login.php">Admin</a>
+    </div>
 
-    <?php if (!empty($success)): ?>
-        <div class="success"><?= htmlspecialchars($success); ?></div>
-    <?php endif; ?>
+    <nav>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="listings.php">Listings</a></li>
+        <li><a href="about.php">About Us</a></li>
+        <?php if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true): ?>
+            <li><a href="admin_dashboard.php">Admin Dashboard</a></li>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['username'])): ?>
+            <li><a href="logout.php">Logout</a></li>
+        <?php else: ?>
+            <li><a href="login.php">Log In</a></li>
+        <?php endif; ?>
+    </nav>
 
-    <form action="signup.php" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required>
+    <main>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" required>
+        <h3>Registration</h3>
+        <?php if (!empty($error)): ?>
+            <div class="error"><?= htmlspecialchars($error); ?></div>
+        <?php endif; ?>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
+        <?php if (!empty($success)): ?>
+            <div class="success"><?= htmlspecialchars($success); ?></div>
+        <?php endif; ?>
 
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password" name="confirm_password" required>
+        <form action="signup.php" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
 
-        <button type="submit">Register</button>
-    </form>
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" name="confirm_password" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </main>
 
     <footer>
         <p>&copy; <?= date("Y"); ?> River Park South Buy&Sell. All rights reserved.</p>
