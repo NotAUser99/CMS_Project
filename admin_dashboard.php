@@ -36,6 +36,7 @@ try {
 } catch (PDOException $e) {
     echo "Error fetching listings: " . $e->getMessage();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +62,22 @@ try {
     <main>
         <?php if ($role === 'Manager'): ?>
             <h2>User Management</h2>
+
+            <!--Show message for User Deletion-->
+                <?php if (isset($_SESSION['message'])): ?>
+                    <div class="success-message">
+                        <?= htmlspecialchars($_SESSION['message']); ?>
+                        <?php unset($_SESSION['message']); ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="error-message">
+                        <?= htmlspecialchars($_SESSION['error']); ?>
+                        <?php unset($_SESSION['error']); ?>
+                    </div>
+                <?php endif; ?>
+
             <table class="user-table">
                 <thead>
                     <tr>
@@ -116,6 +133,7 @@ try {
                         </td>
                     </tr>
                 <?php endforeach; ?>
+
             </tbody>
         </table>
     </main>
